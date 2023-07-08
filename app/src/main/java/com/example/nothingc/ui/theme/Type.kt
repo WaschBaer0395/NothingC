@@ -9,11 +9,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.nothingc.R
 
-val ndot45 = FontFamily(Font(R.font.ndot45))
-val ndot47 = FontFamily(Font(R.font.ndot47))
-val ndot55 = FontFamily(Font(R.font.ndot55))
-val ntype82_regular = FontFamily(Font(R.font.ntype82_regular))
-val ntype82_mono_regular = FontFamily(Font(R.font.ntype82_mono_regular))
+val appWideFont = FontFamily(Font(R.font.ndot55))
+val buttonFontSize = 48
 
 
 val Typography = Typography(
