@@ -1,14 +1,12 @@
 package com.example.nothingc
 
-import android.content.Context.WINDOW_SERVICE
-import android.content.res.Configuration
-import android.util.DisplayMetrics
-import android.view.WindowManager
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.ContextCompat.getSystemService
 
 
 private fun Add(){}
@@ -24,6 +22,19 @@ private fun Tan(){}
 private fun Cosin(){}
 
 
-val Int.nonScaledSp
-    @Composable
-    get() = (this / LocalDensity.current.fontScale).sp
+@Composable
+fun Int.scaledSp(): TextUnit {
+    val value: Float = ((2.625/LocalDensity.current.density)*this).toFloat()
+
+    return with(LocalDensity.current) {
+        val fontScale = this.fontScale
+        val textSize =  value / fontScale
+        textSize.sp
+    }
+}
+
+@Composable
+fun Int.scaledDp(): Dp {
+    val value: Float = ((2.625/LocalDensity.current.density)*this).toFloat()
+    return value.dp
+}

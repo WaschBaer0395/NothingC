@@ -32,6 +32,7 @@ enum class CalculatorButtonComponentDesign {
 }
 
 
+
 @Composable
 internal fun CalculatorButtonComponent(
     modifier: Modifier = Modifier,
@@ -39,10 +40,13 @@ internal fun CalculatorButtonComponent(
     symbol: String,
     onClick: () -> Unit
 ) {
+
+
+
     when (calculatorButtonComponentDesign) {
-        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentPrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.nonScaledSp)
-        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.nonScaledSp)
-        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.nonScaledSp)
+        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentPrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.scaledSp())
+        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.scaledSp())
+        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontFamily = ndot55, fontSize = 62.scaledSp())
     }
 }
 
@@ -135,7 +139,7 @@ internal fun CalculatorButtonComponentSecondary(
 private fun CalculatorButtonComponentPreviewPrimary(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier.size(100.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Primary,
             symbol = " 1 ",
             onClick = {},
@@ -148,7 +152,7 @@ private fun CalculatorButtonComponentPreviewPrimary(){
 private fun CalculatorButtonComponentPreviewSecondary(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier.size(100.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Secondary,
             symbol = " + ",
             onClick = {},
@@ -161,7 +165,7 @@ private fun CalculatorButtonComponentPreviewSecondary(){
 private fun CalculatorButtonComponentPreviewSpecial(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(60.dp),
+            modifier = Modifier.size(60.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Special,
             symbol = " = ",
             onClick = {},

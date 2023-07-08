@@ -81,7 +81,7 @@ private fun CalcScreen(state: CalculatorViewModel.ViewState, dispatcher: (Action
     ) {
         Box(
             modifier = Modifier
-                .padding(horizontal = MaterialTheme.spacing.sm, vertical = MaterialTheme.spacing.sm)
+                .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
         ) {
             ConstraintLayout(
                 modifier = Modifier
@@ -101,7 +101,7 @@ private fun CalcScreen(state: CalculatorViewModel.ViewState, dispatcher: (Action
                         modifier = Modifier.align(Alignment.Center),
                         text = "Hier kommen Nav/Settings buttons hin",
                         fontFamily = ndot55,
-                        fontSize = 15.nonScaledSp,
+                        fontSize = 15.scaledSp(),
                         color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
                         textAlign = TextAlign.Center
                     )
@@ -109,7 +109,7 @@ private fun CalcScreen(state: CalculatorViewModel.ViewState, dispatcher: (Action
 
                 HistoryComponent(
                     modifier = Modifier
-                        .sizeIn(maxHeight = 130.dp)
+                        .sizeIn(maxHeight = 130.scaledDp())
                         .constrainAs(historyConst) {
                             bottom.linkTo(displayConst.top, margin = 0.dp)
                         },

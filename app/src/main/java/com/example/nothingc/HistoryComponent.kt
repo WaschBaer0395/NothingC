@@ -12,8 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.nothingc.ui.theme.ndot55
 
 private val historyList =
@@ -35,7 +33,7 @@ internal fun HistoryComponent(modifier: Modifier = Modifier, state: CalculatorVi
                     overflow = TextOverflow.Visible,
                     maxLines = 1,
                     fontFamily = ndot55,
-                    fontSize = 24.nonScaledSp,
+                    fontSize = 24.scaledSp(),
                     textAlign = TextAlign.End,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -47,7 +45,7 @@ internal fun HistoryComponent(modifier: Modifier = Modifier, state: CalculatorVi
 @Preview(showBackground = true)
 @Composable
 fun HistoryComponentPreview() {
-    Box(modifier = Modifier.padding(10.dp)) {
+    Box(modifier = Modifier.padding(10.scaledDp())) {
         HistoryComponent(state = CalculatorViewModel.ViewState("0","+","0","0"))
     }
 }
