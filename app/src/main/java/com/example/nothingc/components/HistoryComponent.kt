@@ -1,4 +1,4 @@
-package com.example.nothingc
+package com.example.nothingc.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.nothingc.ui.theme.ndot55
+import com.example.nothingc.CalculatorViewModel
+import com.example.nothingc.scaledDp
+import com.example.nothingc.scaledSp
+import com.example.nothingc.ui.theme.appWideFont
 
 private val historyList =
     mutableListOf("1 + 2 = 3", "6 / 3 = 2", "5 x 2 = 10", "6 - 2 = 4", "7 - 2 = 5", "2 ^ 2 = 4", "4 ^ 2 = 16")
@@ -32,7 +35,7 @@ internal fun HistoryComponent(modifier: Modifier = Modifier, state: CalculatorVi
                     text = country,
                     overflow = TextOverflow.Visible,
                     maxLines = 1,
-                    fontFamily = ndot55,
+                    fontFamily = appWideFont,
                     fontSize = 24.scaledSp(),
                     textAlign = TextAlign.End,
                     modifier = Modifier.fillMaxWidth()

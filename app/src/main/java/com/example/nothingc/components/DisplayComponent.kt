@@ -1,4 +1,4 @@
-package com.example.nothingc
+package com.example.nothingc.components
 
 
 import androidx.compose.animation.animateColorAsState
@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -26,10 +27,14 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.nothingc.CalculatorViewModel
+import com.example.nothingc.scaledDp
+import com.example.nothingc.scaledSp
 import com.example.nothingc.ui.theme.NothingBlack
 import com.example.nothingc.ui.theme.NothingSilver
 import com.example.nothingc.ui.theme.NothingWhite
-import com.example.nothingc.ui.theme.ndot55
+import com.example.nothingc.ui.theme.appWideFont
 import kotlinx.coroutines.delay
 
 @Composable
@@ -49,6 +54,16 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 .fillMaxWidth()
                 .align(Alignment.BottomCenter),
         ) {
+
+            HistoryComponent(
+                modifier = Modifier
+                    .sizeIn(maxHeight = 130.scaledDp()),
+                    //.constrainAs(historyConst) {
+                    //    bottom.linkTo(displayConst.top, margin = 0.dp)
+                    //},
+                state = state
+            )
+
             Box(
                 modifier = Modifier.align(Alignment.End),
             ){
@@ -63,7 +78,7 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                     text = input,
                     overflow = TextOverflow.Visible,
                     maxLines = 1,
-                    fontFamily = ndot55,
+                    fontFamily = appWideFont,
                     textAlign = TextAlign.End,
                     modifier = Modifier
                         .align(Alignment.CenterEnd),
@@ -78,7 +93,7 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 text = state.result,
                 overflow = TextOverflow.Visible,
                 maxLines = 1,
-                fontFamily = ndot55,
+                fontFamily = appWideFont,
                 fontSize = 34.scaledSp(),
                 textAlign = TextAlign.End,
                 modifier = Modifier
@@ -119,7 +134,7 @@ fun BlinkingCursor(modifier: Modifier = Modifier) {
             text = "....",
             color = color,
             fontSize = 56.scaledSp(),
-            fontFamily = ndot55
+            fontFamily = appWideFont
         )
     }
 }

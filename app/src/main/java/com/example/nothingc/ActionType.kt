@@ -1,5 +1,7 @@
 package com.example.nothingc
 
+import com.example.nothingc.components.buttons.CalculatorButtonComponentDesign
+
 
 sealed class ActionType(val symbol: String, val calculatorButtonComponentDesign: CalculatorButtonComponentDesign) {
 
@@ -8,7 +10,7 @@ sealed class ActionType(val symbol: String, val calculatorButtonComponentDesign:
 
     object Calculate : ActionType("=", CalculatorButtonComponentDesign.Special)
     object Delete : ActionType("<", CalculatorButtonComponentDesign.Primary)
-    object Clear : ActionType("C", CalculatorButtonComponentDesign.Secondary)
+    object Clear : ActionType("AC", CalculatorButtonComponentDesign.Secondary)
     object Decimal : ActionType(",", CalculatorButtonComponentDesign.Primary)
     object Percentage: ActionType("%", CalculatorButtonComponentDesign.Secondary)
 }
@@ -18,5 +20,5 @@ sealed class Operators(val symbol: String, val calculatorButtonComponentDesign: 
     object Subtract : Operators("-", CalculatorButtonComponentDesign.Secondary)
     object Multiply : Operators("X", CalculatorButtonComponentDesign.Secondary)
     object Divide : Operators("/", CalculatorButtonComponentDesign.Secondary)
-    object Power : Operators("^", CalculatorButtonComponentDesign.Secondary)
+    object Power : Operators("( )", CalculatorButtonComponentDesign.Secondary)
 }
