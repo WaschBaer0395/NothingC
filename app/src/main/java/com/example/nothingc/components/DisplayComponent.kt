@@ -131,9 +131,9 @@ fun BlinkingCursor(modifier: Modifier = Modifier) {
     ) {
         Text(
             modifier = modifier.rotate(-90F),
-            text = "....",
+            text = "...",
             color = color,
-            fontSize = 56.scaledSp(),
+            fontSize = 55.scaledSp(),
             fontFamily = appWideFont
         )
     }
