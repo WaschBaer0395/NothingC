@@ -9,11 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -30,9 +27,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.nothingc.ui.theme.NothingBlack
+import com.example.nothingc.ui.theme.NothingSilver
 import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.ndot55
-import com.example.nothingc.ui.theme.spacing
 import kotlinx.coroutines.delay
 
 @Composable
@@ -55,23 +52,26 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
             Box(
                 modifier = Modifier.align(Alignment.End),
             ){
+
+                var input = state.num1
+                if (state.operator != ""){
+                    input += " " + state.operator + " " + state.num2
+                }
+
                 Text(
                     color = MaterialTheme.colors.onBackground,
-                    text = state.num1 + " " + state.operator + " " + state.num2,
+                    text = input,
                     overflow = TextOverflow.Visible,
                     maxLines = 1,
                     fontFamily = ndot55,
                     textAlign = TextAlign.End,
                     modifier = Modifier
-                        .sizeIn(maxHeight = 80.scaledDp())
                         .align(Alignment.CenterEnd),
                     fontSize = 64.scaledSp(),
                 )
 
                 if (state.num1 == "") BlinkingCursor(modifier = Modifier.align(Alignment.CenterEnd))
             }
-
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.sm))
 
             Text(
                 color = MaterialTheme.colors.onBackground,
@@ -83,7 +83,6 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 textAlign = TextAlign.End,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .sizeIn(maxHeight = 50.scaledDp())
             )
         }
     }
@@ -103,7 +102,7 @@ fun BlinkingCursor(modifier: Modifier = Modifier) {
     val color by animateColorAsState(
         targetValue = if (isBlinking){
                             (if (isSystemInDarkTheme()) NothingWhite else NothingBlack)
-                        } else if (isSystemInDarkTheme()) NothingBlack else NothingWhite,
+                        } else if (isSystemInDarkTheme()) NothingBlack else NothingSilver,
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 400), // Duration of each blink state
             repeatMode = RepeatMode.Reverse
