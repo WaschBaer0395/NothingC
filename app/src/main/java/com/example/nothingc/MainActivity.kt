@@ -28,6 +28,10 @@ import com.example.nothingc.ui.theme.appWideFont
 import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.example.nothingc.components.CalcButtGridLayoutH
 import com.example.nothingc.components.CalcButtGridLayoutV
 import com.example.nothingc.ui.theme.NothingSilver
@@ -38,33 +42,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
 
-
         setContent {
-            CalculatorTheme {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
-                ) {
-
-                    val viewModel = viewModel<CalculatorViewModel>()
-                    val state = viewModel.viewState.collectAsState(
-                        initial = CalculatorViewModel.ViewState(
-                            "0",
-                            "+",
-                            "0",
-                            "0"
-                        )
-                    ).value
-
-                    DetectOrientation(state)
-                }
-            }
+            DetectOrientation()
         }
+
+        // forcing the app to fullscreen (behind transparent status bar)
+        //WindowCompat.setDecorFitsSystemWindows(window, true)
+
+//        // adding a padding to respect gestures, status bar and navigation bar
+//        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, windowInsets ->
+//            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
+//            // Apply the insets as padding to the view. Here we're setting all of the
+//            // dimensions, but apply as appropriate to your layout. You could also
+//            // update the views margin if more appropriate.
+//            view.updatePadding(
+//                insets.left, // gesture swipe
+//                insets.top,  // status bar
+//                insets.right, // gesture swipe
+//                insets.bottom // android navbar/pill
+//            )
+//            // Return CONSUMED if we don't want the window insets to keep being passed
+//            // down to descendant views.
+//            WindowInsetsCompat.CONSUMED
+//        }
     }
 }
 @Composable
-private fun DetectOrientation(state: CalculatorViewModel.ViewState) {
+private fun DetectOrientation() {
     val configuration = LocalConfiguration.current
     when (configuration.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> {

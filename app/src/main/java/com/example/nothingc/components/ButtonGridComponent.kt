@@ -124,7 +124,6 @@ fun CalcButtGridLayoutH(modifier: Modifier = Modifier, dispatcher: (ActionType) 
 
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
-    val screenWidth = configuration.screenHeightDp.dp
 
     LazyHorizontalGrid(
         modifier = modifier
@@ -132,11 +131,11 @@ fun CalcButtGridLayoutH(modifier: Modifier = Modifier, dispatcher: (ActionType) 
             .fillMaxWidth(),
         rows = GridCells.Fixed(4),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm.scaledDp()),
-        horizontalArrangement = Arrangement.spacedBy(28.scaledDp()),
+        horizontalArrangement = Arrangement.spacedBy(10.scaledDp()),
         content = {
             items(buttons) {
                 CalculatorButtonComponentWide(
-                    modifier = Modifier.aspectRatio(2f),
+                    modifier = Modifier.aspectRatio(2.4f),
                     calculatorButtonComponentDesign = it.calculatorButtonComponentDesign,
                     symbol = it.symbol,
                     fontSize = buttonFontSizeH.scaledSp(),

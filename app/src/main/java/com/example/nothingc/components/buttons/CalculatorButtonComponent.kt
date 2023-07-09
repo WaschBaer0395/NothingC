@@ -2,11 +2,11 @@ package com.example.nothingc.components.buttons
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import com.example.nothingc.ui.theme.CalculatorTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -19,10 +19,6 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import com.example.nothingc.scaledDp
 import com.example.nothingc.scaledSp
-import com.example.nothingc.ui.theme.NothingBlack
-import com.example.nothingc.ui.theme.NothingGrey
-import com.example.nothingc.ui.theme.NothingRed
-import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
 import com.example.nothingc.ui.theme.buttonFontSizeV
 
@@ -65,7 +61,7 @@ internal fun CalculatorButtonComponentSpecial(
             contentAlignment = Alignment.Center,
             modifier = modifier
                 .clip(CircleShape)
-                .background(NothingRed)
+                .background(MaterialTheme.colors.error)
                 .clickable { onClick() }
                 .then(modifier)
         ){
@@ -74,7 +70,7 @@ internal fun CalculatorButtonComponentSpecial(
                 modifier = Modifier
                     .padding(end = 0.5.dp),
                 textAlign = TextAlign.Center,
-                color = NothingWhite,
+                color = MaterialTheme.colors.onError,
                 fontSize = fontSize,
                 fontFamily = appWideFont,
             )
@@ -93,7 +89,7 @@ internal fun CalculatorButtonComponentPrimary(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(CircleShape)
-            .background(if (isSystemInDarkTheme()) NothingGrey else NothingWhite)
+            .background(MaterialTheme.colors.primary)
             .clickable { onClick() }
             .then(modifier)
     ){
@@ -101,7 +97,7 @@ internal fun CalculatorButtonComponentPrimary(
             text = symbol,
             modifier = Modifier.padding(end = 0.5.dp),
             textAlign = TextAlign.Center,
-            color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
+            color = MaterialTheme.colors.onPrimary,
             fontSize = fontSize,
             fontFamily = appWideFont,
         )
@@ -119,7 +115,7 @@ internal fun CalculatorButtonComponentSecondary(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(CircleShape)
-            .background(if (isSystemInDarkTheme()) NothingGrey else NothingWhite)
+            .background(MaterialTheme.colors.secondary)
             .clickable { onClick() }
             .then(modifier)
     ){
@@ -127,7 +123,7 @@ internal fun CalculatorButtonComponentSecondary(
             text = symbol,
             modifier = Modifier.padding(end = 0.5.dp),
             textAlign = TextAlign.Center,
-            color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
+            color = MaterialTheme.colors.onSecondary,
             fontSize = fontSize,
             fontFamily = appWideFont,
         )

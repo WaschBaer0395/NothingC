@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -60,14 +61,14 @@ internal fun CalculatorButtonComponentWideSpecial(
             contentAlignment = Alignment.Center,
             modifier = modifier
                 .clip(RoundedCornerShape(50.scaledDp()))
-                .background(NothingRed)
+                .background(MaterialTheme.colors.error)
                 .clickable { onClick() }
                 .then(modifier)
         ){
             Text(
                 modifier = Modifier.padding(end = 0.5.dp),
                 textAlign = TextAlign.Center,
-                color = NothingWhite,
+                color = MaterialTheme.colors.onError,
                 text = symbol,
                 fontSize = fontSize,
                 fontFamily = appWideFont,
@@ -87,14 +88,14 @@ internal fun CalculatorButtonComponentWidePrimary(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(RoundedCornerShape(50.scaledDp()))
-            .background(if (isSystemInDarkTheme()) NothingGrey else NothingWhite)
+            .background(MaterialTheme.colors.primary)
             .clickable { onClick() }
             .then(modifier)
     ){
         Text(
             modifier = Modifier.padding(end = 0.5.dp),
             textAlign = TextAlign.Center,
-            color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
+            color = MaterialTheme.colors.onPrimary,
             text = symbol,
             fontSize = fontSize,
             fontFamily = appWideFont,
@@ -113,14 +114,14 @@ internal fun CalculatorButtonComponentWideSecondary(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(RoundedCornerShape(50.scaledDp()))
-            .background(if (isSystemInDarkTheme()) NothingWhite else NothingGrey)
+            .background(MaterialTheme.colors.secondary)
             .clickable { onClick() }
             .then(modifier)
     ){
         Text(
             modifier = Modifier.padding(end = 0.5.dp),
             textAlign = TextAlign.Center,
-            color = if (isSystemInDarkTheme()) NothingBlack else NothingWhite,
+            color = MaterialTheme.colors.onSecondary,
             text = symbol,
             fontSize = fontSize,
             fontFamily = appWideFont,

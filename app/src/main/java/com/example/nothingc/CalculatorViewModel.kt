@@ -21,9 +21,9 @@ class CalculatorViewModel : ViewModel() {
 
     fun dispatch(action: ActionType) {
         when (action) {
-            is ActionType.Number -> onNumberClicked(action.number)
-            is ActionType.Pi -> onNumberClicked(action.pi)
-            is ActionType.Euler -> onNumberClicked(action.euler)
+            is ActionType.Number -> onNumberClicked(action.number.toInt())
+            is ActionType.Pi -> onSpecialClicked(action.pi)
+            is ActionType.Euler -> onSpecialClicked(action.euler)
             is ActionType.Calculate -> onCalculateClicked()
             is ActionType.Clear -> onClearClicked()
             is ActionType.Decimal -> onDecimalClicked()
@@ -79,15 +79,15 @@ class CalculatorViewModel : ViewModel() {
         val currentState = state.value
 
         if (currentState.num1.isNotEmpty() && currentState.num2.isNotEmpty() && currentState.operator != null) {
-            val num1 = currentState.num1.toDouble()
-            val num2 = currentState.num2.toDouble()
+            val num1 = currentState.num1.toInt()
+            val num2 = currentState.num2.toInt()
 
             val result = when (currentState.operator) {
                 Operators.Add -> num1 + num2
                 Operators.Subtract -> num1 - num2
                 Operators.Multiply -> num1 * num2
                 Operators.Divide -> num1 / num2
-                Operators.Power -> num1.pow(num2)
+                Operators.Power -> num1.toDouble().pow(num2.toDouble())
                 else -> {}
             }
 
@@ -95,7 +95,17 @@ class CalculatorViewModel : ViewModel() {
         }
     }
 
-    private fun onNumberClicked(number: Double) {
+    private fun onNumberClicked(number: Int) {
+        val currentState = state.value
+
+        if (currentState.operator == null) {
+            state.value = currentState.copy(num1 = currentState.num1 + number)
+        } else {
+            state.value = currentState.copy(num2 = currentState.num2 + number)
+        }
+    }
+
+    private fun onSpecialClicked(number: Double) {
         val currentState = state.value
 
         if (currentState.operator == null) {
