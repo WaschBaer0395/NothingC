@@ -28,12 +28,18 @@ import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
 import android.content.res.Configuration
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.example.nothingc.ui.theme.NothingSilver
 
 class MainActivity : ComponentActivity() {
 
@@ -42,9 +48,14 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             CalculatorTheme {
-                val viewModel = viewModel<CalculatorViewModel>()
-                val state =
-                    viewModel.viewState.collectAsState(
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
+                ) {
+
+                    val viewModel = viewModel<CalculatorViewModel>()
+                    val state = viewModel.viewState.collectAsState(
                         initial = CalculatorViewModel.ViewState(
                             "0",
                             "+",
@@ -52,7 +63,9 @@ class MainActivity : ComponentActivity() {
                             "0"
                         )
                     ).value
-                DetectOrientation(state)
+
+                    DetectOrientation(state)
+                }
             }
         }
     }
@@ -103,50 +116,48 @@ private fun DetectOrientation(state: CalculatorViewModel.ViewState) {
 private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher: (ActionType) -> Unit) {
     Surface(
         color = MaterialTheme.colors.background,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
     ) {
-        Box(
+        ConstraintLayout(
             modifier = Modifier
-                .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
-        ) {
-            ConstraintLayout(
+                .fillMaxWidth()
+                .padding(top = 0.dp, bottom = 0.dp)
+        ){
+            val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
+
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, bottom = 0.dp)
+                    .constrainAs(navConstr) {
+                        top.linkTo(parent.top, margin = 0.dp)
+                    }
             ){
-                val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .constrainAs(navConstr) {
-                            bottom.linkTo(historyConst.top, margin = 0.dp)
-                        }
-                ){
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Vertical",
-                        fontFamily = appWideFont,
-                        fontSize = 15.scaledSp(),
-                        color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
-                        textAlign = TextAlign.Center
-                    )
-                }
-
-                DisplayComponent(
-                    modifier = Modifier
-                        .constrainAs(displayConst){
-                            bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
-                        },
-                    state = state
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "Vertical",
+                    fontFamily = appWideFont,
+                    fontSize = 15.scaledSp(),
+                    color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
+                    textAlign = TextAlign.Center
                 )
-                CalculatorButtonsGridLayout(
-                    modifier = Modifier
-                        .constrainAs(calcButtGridConst){
-                            bottom.linkTo(parent.bottom, margin = 0.dp)
-                        },
-                    dispatcher = dispatcher)
             }
+
+            DisplayComponent(
+                modifier = Modifier
+                    .constrainAs(displayConst){
+                        bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
+                        top.linkTo(navConstr.top, margin = 0.dp)
+                    },
+                state = state
+            )
+            CalculatorButtonsGridLayout(
+                modifier = Modifier
+                    .constrainAs(calcButtGridConst){
+                        bottom.linkTo(parent.bottom, margin = 0.dp)
+                    },
+                dispatcher = dispatcher)
         }
     }
 }
@@ -204,18 +215,31 @@ private fun CalcScreenHorizontal(state: CalculatorViewModel.ViewState, dispatche
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = (1080*0.4).toInt(), heightDp = (2400*0.4).toInt())
 @Composable
 private fun CalcScreenPreviewVertical() {
     CalculatorTheme {
-        CalcScreenVertical(CalculatorViewModel.ViewState("0","+","0","0")){}
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
+        ) {
+            CalcScreenVertical(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
+        }
     }
 }
 
-@Preview(showBackground = true)
+
+@Preview(showBackground = true, widthDp = (2400*0.4).toInt(), heightDp = (1080*0.4).toInt())
 @Composable
 private fun CalcScreenPreviewHorizontal() {
     CalculatorTheme {
-        CalcScreenHorizontal(CalculatorViewModel.ViewState("0","+","0","0")){}
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
+        ) {
+            CalcScreenHorizontal(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
+        }
     }
 }
