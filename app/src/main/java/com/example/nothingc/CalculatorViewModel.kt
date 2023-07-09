@@ -22,6 +22,8 @@ class CalculatorViewModel : ViewModel() {
     fun dispatch(action: ActionType) {
         when (action) {
             is ActionType.Number -> onNumberClicked(action.number)
+            is ActionType.Pi -> onNumberClicked(action.pi)
+            is ActionType.Euler -> onNumberClicked(action.euler)
             is ActionType.Calculate -> onCalculateClicked()
             is ActionType.Clear -> onClearClicked()
             is ActionType.Decimal -> onDecimalClicked()
@@ -86,13 +88,14 @@ class CalculatorViewModel : ViewModel() {
                 Operators.Multiply -> num1 * num2
                 Operators.Divide -> num1 / num2
                 Operators.Power -> num1.pow(num2)
+                else -> {}
             }
 
             state.value = currentState.copy(result = "$result =", num1 = "",num2 = "", operator = null)
         }
     }
 
-    private fun onNumberClicked(number: Int) {
+    private fun onNumberClicked(number: Double) {
         val currentState = state.value
 
         if (currentState.operator == null) {

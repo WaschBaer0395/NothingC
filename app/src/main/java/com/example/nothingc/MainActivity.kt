@@ -21,30 +21,23 @@ import androidx.compose.material.Text
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.nothingc.components.CalculatorButtonsGridLayout
 import com.example.nothingc.components.DisplayComponent
 import com.example.nothingc.ui.theme.NothingBlack
 import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
 import android.content.res.Configuration
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.example.nothingc.components.CalcButtGridLayoutH
+import com.example.nothingc.components.CalcButtGridLayoutV
 import com.example.nothingc.ui.theme.NothingSilver
 
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         setContent {
             CalculatorTheme {
@@ -152,7 +145,7 @@ private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher:
                     },
                 state = state
             )
-            CalculatorButtonsGridLayout(
+            CalcButtGridLayoutV(
                 modifier = Modifier
                     .constrainAs(calcButtGridConst){
                         bottom.linkTo(parent.bottom, margin = 0.dp)
@@ -196,20 +189,23 @@ private fun CalcScreenHorizontal(state: CalculatorViewModel.ViewState, dispatche
                     )
                 }
 
-//                DisplayComponent(
-//                    modifier = Modifier
-//                        .constrainAs(displayConst){
-//                            bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
-//                        },
-//                    state = state
-//                )
-//                CalculatorButtonsGridLayout(
-//                    modifier = Modifier
-//                        .constrainAs(calcButtGridConst){
-//                            bottom.linkTo(parent.bottom, margin = 0.dp)
-//                        },
-//                    dispatcher = dispatcher
-//                )
+                DisplayComponent(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .constrainAs(displayConst){
+                            bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
+                        },
+                    state = state
+                )
+
+                CalcButtGridLayoutH(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .constrainAs(calcButtGridConst){
+                            bottom.linkTo(parent.bottom, margin = 0.dp)
+                        },
+                    dispatcher = dispatcher
+                )
             }
         }
     }

@@ -58,14 +58,14 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 .align(Alignment.BottomCenter),
         ) {
 
-            HistoryComponent(
-                modifier = Modifier
-                    .sizeIn(maxHeight = 130.scaledDp()),
-                    //.constrainAs(historyConst) {
-                    //    bottom.linkTo(displayConst.top, margin = 0.dp)
-                    //},
-                state = state
-            )
+//            HistoryComponent(
+//                modifier = Modifier
+//                    .sizeIn(maxHeight = 130.scaledDp()),
+//                    //.constrainAs(historyConst) {
+//                    //    bottom.linkTo(displayConst.top, margin = 0.dp)
+//                    //},
+//                state = state
+//            )
 
             Box(
                 modifier = Modifier.align(Alignment.End),

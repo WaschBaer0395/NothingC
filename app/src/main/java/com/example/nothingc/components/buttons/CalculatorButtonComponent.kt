@@ -24,7 +24,7 @@ import com.example.nothingc.ui.theme.NothingGrey
 import com.example.nothingc.ui.theme.NothingRed
 import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
-import com.example.nothingc.ui.theme.buttonFontSize
+import com.example.nothingc.ui.theme.buttonFontSizeV
 
 // Design to select for VariablesAuswahlfeld
 enum class CalculatorButtonComponentDesign {
@@ -40,15 +40,16 @@ internal fun CalculatorButtonComponent(
     modifier: Modifier = Modifier,
     calculatorButtonComponentDesign: CalculatorButtonComponentDesign = CalculatorButtonComponentDesign.Primary,
     symbol: String,
+    fontSize: TextUnit,
     onClick: () -> Unit
 ) {
 
 
 
     when (calculatorButtonComponentDesign) {
-        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentPrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
-        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
-        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
+        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentPrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
+        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
+        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
     }
 }
 
@@ -118,7 +119,7 @@ internal fun CalculatorButtonComponentSecondary(
         contentAlignment = Alignment.Center,
         modifier = modifier
             .clip(CircleShape)
-            .background(if (isSystemInDarkTheme()) NothingWhite else NothingGrey)
+            .background(if (isSystemInDarkTheme()) NothingGrey else NothingWhite)
             .clickable { onClick() }
             .then(modifier)
     ){
@@ -126,7 +127,7 @@ internal fun CalculatorButtonComponentSecondary(
             text = symbol,
             modifier = Modifier.padding(end = 0.5.dp),
             textAlign = TextAlign.Center,
-            color = if (isSystemInDarkTheme()) NothingBlack else NothingWhite,
+            color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
             fontSize = fontSize,
             fontFamily = appWideFont,
         )
@@ -141,6 +142,7 @@ private fun CalculatorButtonComponentPreviewPrimary(){
             modifier = Modifier.size(100.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Primary,
             symbol = " 1 ",
+            fontSize = buttonFontSizeV.scaledSp(),
             onClick = {},
         )
     }
@@ -154,6 +156,7 @@ private fun CalculatorButtonComponentPreviewSecondary(){
             modifier = Modifier.size(100.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Secondary,
             symbol = " + ",
+            fontSize = buttonFontSizeV.scaledSp(),
             onClick = {},
         )
     }
@@ -167,6 +170,7 @@ private fun CalculatorButtonComponentPreviewSpecial(){
             modifier = Modifier.size(100.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Special,
             symbol = " = ",
+            fontSize = buttonFontSizeV.scaledSp(),
             onClick = {},
         )
     }

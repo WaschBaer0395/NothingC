@@ -24,7 +24,7 @@ import com.example.nothingc.ui.theme.NothingGrey
 import com.example.nothingc.ui.theme.NothingRed
 import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
-import com.example.nothingc.ui.theme.buttonFontSize
+import com.example.nothingc.ui.theme.buttonFontSizeH
 
 // Design to select for VariablesAuswahlfeld
 enum class CalculatorButtonComponentWideDesign {
@@ -38,12 +38,13 @@ internal fun CalculatorButtonComponentWide(
     modifier: Modifier = Modifier,
     calculatorButtonComponentDesign: CalculatorButtonComponentDesign = CalculatorButtonComponentDesign.Primary,
     symbol: String,
+    fontSize: TextUnit,
     onClick: () -> Unit
 ) {
     when (calculatorButtonComponentDesign) {
-        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentWidePrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
-        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentWideSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
-        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentWideSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = buttonFontSize.scaledSp())
+        CalculatorButtonComponentDesign.Primary -> CalculatorButtonComponentWidePrimary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
+        CalculatorButtonComponentDesign.Secondary -> CalculatorButtonComponentWideSecondary(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
+        CalculatorButtonComponentDesign.Special -> CalculatorButtonComponentWideSpecial(modifier = modifier, symbol = symbol, onClick = onClick, fontSize = fontSize)
     }
 }
 
@@ -132,9 +133,10 @@ internal fun CalculatorButtonComponentWideSecondary(
 private fun CalculatorButtonComponentWidePrimaryPreview(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(width = 200.scaledDp(), height = 100.scaledDp()),
+            modifier = Modifier.size(width = 100.scaledDp(), height = 50.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Primary,
             symbol = " log ",
+            fontSize = buttonFontSizeH.scaledSp(),
             onClick = {},
         )
     }
@@ -145,9 +147,10 @@ private fun CalculatorButtonComponentWidePrimaryPreview(){
 private fun CalculatorButtonComponentWideSecondaryPreview(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(width = 200.scaledDp(), height = 100.scaledDp()),
+            modifier = Modifier.size(width = 100.scaledDp(), height = 50.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Secondary,
             symbol = "Sin ( )",
+            fontSize = buttonFontSizeH.scaledSp(),
             onClick = {},
         )
     }
@@ -158,9 +161,10 @@ private fun CalculatorButtonComponentWideSecondaryPreview(){
 private fun CalculatorButtonComponentWideSpecialPreview(){
     CalculatorTheme {
         CalculatorButtonComponent(
-            modifier = Modifier.size(width = 200.scaledDp(), height = 100.scaledDp()),
+            modifier = Modifier.size(width = 100.scaledDp(), height = 50.scaledDp()),
             calculatorButtonComponentDesign = CalculatorButtonComponentDesign.Special,
             symbol = " = ",
+            fontSize = buttonFontSizeH.scaledSp(),
             onClick = {},
         )
     }
