@@ -89,7 +89,7 @@ class CalculatorViewModel : ViewModel() {
                 Operators.Add -> num1 + num2
                 Operators.Subtract -> num1 - num2
                 Operators.Multiply -> num1 * num2
-                Operators.Divide -> num1 / num2
+                Operators.Divide -> if (num2 == 0.0) "Nothing" else num1 / num2
                 Operators.Power -> num1.toDouble().pow(num2.toDouble())
                 else -> {}
             }
