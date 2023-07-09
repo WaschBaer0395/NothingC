@@ -79,8 +79,8 @@ class CalculatorViewModel : ViewModel() {
         val currentState = state.value
 
         if (currentState.num1.isNotEmpty() && currentState.num2.isNotEmpty() && currentState.operator != null) {
-            val num1 = currentState.num1.toInt()
-            val num2 = currentState.num2.toInt()
+            val num1 = currentState.num1.toDouble()
+            val num2 = currentState.num2.toDouble()
 
             val result = when (currentState.operator) {
                 Operators.Add -> num1 + num2
