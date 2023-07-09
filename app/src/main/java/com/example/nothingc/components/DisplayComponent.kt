@@ -6,6 +6,7 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -75,7 +78,6 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 if (state.operator != ""){
                     input += " " + state.operator + " " + state.num2
                 }
-
                 Text(
                     color = MaterialTheme.colors.onBackground,
                     text = input,
@@ -84,8 +86,9 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                     fontFamily = appWideFont,
                     textAlign = TextAlign.End,
                     modifier = Modifier
+                        .horizontalScroll(rememberScrollState(0), reverseScrolling = true)
                         .align(Alignment.CenterEnd),
-                    fontSize = 64.scaledSp(),
+                    fontSize = 60.scaledSp(),
                 )
 
                 if (state.num1 == "") BlinkingCursor(modifier = Modifier.align(Alignment.CenterEnd))
@@ -100,6 +103,7 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 fontSize = 34.scaledSp(),
                 textAlign = TextAlign.End,
                 modifier = Modifier
+                    //.horizontalScroll(rememberScrollState(0), reverseScrolling = true)
                     .fillMaxWidth()
             )
         }

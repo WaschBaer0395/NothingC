@@ -62,7 +62,6 @@ fun Log(num1: Double, num2: Double) : Double{
     return log(num1, num2)
 }
 
-
 @Composable
 fun Int.scaledSp(): TextUnit {
     val value: Float = ((2.625/LocalDensity.current.density)*this).toFloat()

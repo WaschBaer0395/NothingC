@@ -28,13 +28,32 @@ import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.appWideFont
 import android.content.res.Configuration
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.RadioButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.core.view.ViewCompat
-import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import com.example.nothingc.components.CalcButtGridLayoutH
 import com.example.nothingc.components.CalcButtGridLayoutV
+import com.example.nothingc.components.MenuComponent
+import com.example.nothingc.components.MenuPopup
 import com.example.nothingc.ui.theme.NothingSilver
 class MainActivity : ComponentActivity() {
 
@@ -113,6 +132,7 @@ private fun DetectOrientation() {
 
 @Composable
 private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher: (ActionType) -> Unit) {
+    val topMargin = 10.scaledDp()
     Surface(
         color = MaterialTheme.colors.background,
         modifier = Modifier
@@ -123,24 +143,15 @@ private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher:
             modifier = Modifier
                 .fillMaxWidth()
         ){
-            val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
+            val (navConstr, displayConst, calcButtGridConst) = createRefs()
 
-            Box(
+            MenuComponent(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .constrainAs(navConstr) {
-                        top.linkTo(parent.top, margin = 0.dp)
-                    }
-            ){
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = "Vertical",
-                    fontFamily = appWideFont,
-                    fontSize = 15.scaledSp(),
-                    color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
-                    textAlign = TextAlign.Center
-                )
-            }
+                .fillMaxWidth()
+                .constrainAs(navConstr) {
+                    top.linkTo(parent.top, margin = topMargin)
+                }
+            )
 
             DisplayComponent(
                 modifier = Modifier
@@ -155,7 +166,8 @@ private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher:
                     .constrainAs(calcButtGridConst){
                         bottom.linkTo(parent.bottom, margin = 0.dp)
                     },
-                dispatcher = dispatcher)
+                dispatcher = dispatcher
+            )
         }
     }
 }
