@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.example.nothingc.ActionType
 import com.example.nothingc.Operators
 import com.example.nothingc.components.buttons.CalculatorButtonComponent
+import com.example.nothingc.scaledDp
 import com.example.nothingc.ui.theme.spacing
 
 @Composable
@@ -41,8 +42,8 @@ fun CalculatorButtonsGridLayout(modifier: Modifier = Modifier, dispatcher: (Acti
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(4),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm.scaledDp()),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm.scaledDp()),
         content = {
             items(buttons) {
                 CalculatorButtonComponent(

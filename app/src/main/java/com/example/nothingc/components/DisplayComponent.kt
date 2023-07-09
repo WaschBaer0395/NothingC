@@ -9,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
@@ -24,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,6 +36,7 @@ import com.example.nothingc.scaledSp
 import com.example.nothingc.ui.theme.NothingBlack
 import com.example.nothingc.ui.theme.NothingSilver
 import com.example.nothingc.ui.theme.NothingWhite
+import com.example.nothingc.ui.theme.Spacing.sm
 import com.example.nothingc.ui.theme.appWideFont
 import kotlinx.coroutines.delay
 
@@ -42,10 +45,10 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colors.background)
+            .background(Color.Transparent)
             .padding(
-                vertical = 16.scaledDp(),
-                horizontal = 16.scaledDp()
+                vertical = sm.scaledDp(),
+                horizontal = sm.scaledDp()
             )
     ) {
 
