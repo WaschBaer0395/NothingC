@@ -1,5 +1,6 @@
 package com.example.nothingc
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -40,31 +41,33 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // adding a padding to respect gestures, status bar and navigation bar
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
+            // Apply the insets as padding to the view. Here we're setting all of the
+            // dimensions, but apply as appropriate to your layout. You could also
+            // update the views margin if more appropriate.
+            view.updatePadding(
+                //insets.left, // gesture swipe
+                //insets.top,  // status bar
+                //insets.right, // gesture swipe
+                //insets.bottom // android navbar/pill
+            )
+            // Return CONSUMED if we don't want the window insets to keep being passed
+            // down to descendant views.
+            WindowInsetsCompat.CONSUMED
+        }
+
+        window.decorView.setBackgroundColor(if(isSystemInDarkMode(this)) NothingBlack.hashCode() else NothingSilver.hashCode())
 
         setContent {
             DetectOrientation()
         }
-
-        // forcing the app to fullscreen (behind transparent status bar)
-        //WindowCompat.setDecorFitsSystemWindows(window, true)
-
-//        // adding a padding to respect gestures, status bar and navigation bar
-//        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { view, windowInsets ->
-//            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemGestures())
-//            // Apply the insets as padding to the view. Here we're setting all of the
-//            // dimensions, but apply as appropriate to your layout. You could also
-//            // update the views margin if more appropriate.
-//            view.updatePadding(
-//                insets.left, // gesture swipe
-//                insets.top,  // status bar
-//                insets.right, // gesture swipe
-//                insets.bottom // android navbar/pill
-//            )
-//            // Return CONSUMED if we don't want the window insets to keep being passed
-//            // down to descendant views.
-//            WindowInsetsCompat.CONSUMED
-//        }
     }
+}
+fun isSystemInDarkMode(context: Context): Boolean {
+    val configuration = context.resources.configuration
+    return configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 }
 @Composable
 private fun DetectOrientation() {
@@ -74,8 +77,7 @@ private fun DetectOrientation() {
         Configuration.ORIENTATION_LANDSCAPE -> {
             CalculatorTheme {
                 val viewModel = viewModel<CalculatorViewModel>()
-                val state =
-                    viewModel.viewState.collectAsState(
+                val state =  viewModel.viewState.collectAsState(
                         initial = CalculatorViewModel.ViewState(
                             "0",
                             "+",
@@ -115,11 +117,11 @@ private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher:
         color = MaterialTheme.colors.background,
         modifier = Modifier
             .fillMaxSize()
+            .padding(horizontal = 16.scaledDp(), vertical = 24.scaledDp())
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
         ){
             val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
 

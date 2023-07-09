@@ -1,6 +1,7 @@
 package com.example.nothingc.ui.theme
 
 import android.app.Activity
+import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
@@ -65,10 +66,18 @@ fun CalculatorTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colors.background.toArgb()
-            WindowCompat
-                .getInsetsController(window, view)
-                .isAppearanceLightStatusBars = !useDarkTheme
+
+            window.statusBarColor = Color.Transparent.toArgb()
+            window.navigationBarColor = Color.Transparent.toArgb()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                window.isNavigationBarContrastEnforced = false
+            }
+
+            val windowsInsetsController = WindowCompat.getInsetsController(window, view)
+
+            windowsInsetsController.isAppearanceLightStatusBars = !useDarkTheme
+            windowsInsetsController.isAppearanceLightNavigationBars = !useDarkTheme
         }
     }
 
