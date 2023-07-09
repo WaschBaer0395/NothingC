@@ -35,7 +35,6 @@ import androidx.core.view.updatePadding
 import com.example.nothingc.components.CalcButtGridLayoutH
 import com.example.nothingc.components.CalcButtGridLayoutV
 import com.example.nothingc.ui.theme.NothingSilver
-
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +68,7 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 private fun DetectOrientation() {
+
     val configuration = LocalConfiguration.current
     when (configuration.orientation) {
         Configuration.ORIENTATION_LANDSCAPE -> {
@@ -115,12 +115,11 @@ private fun CalcScreenVertical(state: CalculatorViewModel.ViewState, dispatcher:
         color = MaterialTheme.colors.background,
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
     ) {
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 0.dp, bottom = 0.dp)
+                .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
         ){
             val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
 
@@ -165,52 +164,47 @@ private fun CalcScreenHorizontal(state: CalculatorViewModel.ViewState, dispatche
         color = MaterialTheme.colors.background,
         modifier = Modifier.fillMaxSize()
     ) {
-        Box(
+        ConstraintLayout(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 16.scaledDp(), vertical = 16.scaledDp())
-        ) {
-            ConstraintLayout(
+        ){
+            val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
+
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 0.dp, bottom = 0.dp)
+                    .constrainAs(navConstr) {
+                        bottom.linkTo(historyConst.top, margin = 0.dp)
+                    }
             ){
-                val (navConstr, historyConst, displayConst, calcButtGridConst) = createRefs()
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .constrainAs(navConstr) {
-                            bottom.linkTo(historyConst.top, margin = 0.dp)
-                        }
-                ){
-                    Text(
-                        modifier = Modifier.align(Alignment.Center),
-                        text = "Horizontal",
-                        fontFamily = appWideFont,
-                        fontSize = 15.scaledSp(),
-                        color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
-                        textAlign = TextAlign.Center
-                    )
-                }
-
-                DisplayComponent(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .constrainAs(displayConst){
-                            bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
-                        },
-                    state = state
-                )
-
-                CalcButtGridLayoutH(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .constrainAs(calcButtGridConst){
-                            bottom.linkTo(parent.bottom, margin = 0.dp)
-                        },
-                    dispatcher = dispatcher
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = "Horizontal",
+                    fontFamily = appWideFont,
+                    fontSize = 15.scaledSp(),
+                    color = if (isSystemInDarkTheme()) NothingWhite else NothingBlack,
+                    textAlign = TextAlign.Center
                 )
             }
+
+            DisplayComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .constrainAs(displayConst) {
+                        bottom.linkTo(calcButtGridConst.top, margin = 0.dp)
+                    },
+                state = state
+            )
+
+            CalcButtGridLayoutH(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .constrainAs(calcButtGridConst) {
+                        bottom.linkTo(parent.bottom, margin = 0.dp)
+                    },
+                dispatcher = dispatcher
+            )
         }
     }
 }
@@ -222,7 +216,7 @@ private fun CalcScreenPreviewVertical() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
+                .background(if (isSystemInDarkTheme()) NothingBlack else NothingSilver)
         ) {
             CalcScreenVertical(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
         }
@@ -237,7 +231,7 @@ private fun CalcScreenPreviewHorizontal() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(if(isSystemInDarkTheme()) NothingBlack else NothingSilver)
+                .background(if (isSystemInDarkTheme()) NothingBlack else NothingSilver)
         ) {
             CalcScreenHorizontal(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
         }
