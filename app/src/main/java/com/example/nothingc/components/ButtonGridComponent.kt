@@ -44,9 +44,9 @@ fun CalcButtGridLayoutV(modifier: Modifier = Modifier, dispatcher: (ActionType) 
         ActionType.Number((6).toDouble()),
         ActionType.Operator(Operators.Subtract),
         // start row 4
-        ActionType.Number((3).toDouble()),
-        ActionType.Number((2).toDouble()),
         ActionType.Number((1).toDouble()),
+        ActionType.Number((2).toDouble()),
+        ActionType.Number((3).toDouble()),
         ActionType.Operator(Operators.Add),
         // start row 5
         ActionType.Number((0).toDouble()),

@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.nothingc.R
 
-val appWideFont: FontFamily = FontFamily(Font(R.font.ndot55))
+val appWideFont: FontFamily = FontFamily.Default
 val buttonFontSizeV = 44
 val buttonFontSizeH = 24
 

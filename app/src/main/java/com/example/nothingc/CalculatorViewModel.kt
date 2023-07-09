@@ -1,6 +1,8 @@
 package com.example.nothingc
 
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -82,6 +84,7 @@ class CalculatorViewModel : ViewModel() {
             val num1 = currentState.num1.toDouble()
             val num2 = currentState.num2.toDouble()
 
+            android.util.Log.d(TAG, currentState.operator.toString())
             val result = when (currentState.operator) {
                 Operators.Add -> num1 + num2
                 Operators.Subtract -> num1 - num2

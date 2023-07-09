@@ -1,6 +1,8 @@
 package com.example.nothingc
 
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
@@ -27,7 +29,8 @@ fun Multiply(num1: Double, num2: Double) : Double{
     return num1 * num2
 }
 fun Divide(num1: Double, num2: Double) : Double{
-    return num1 / num2
+    if (num2 != 0.0) return num1 / num2
+    else return 0.0
 }
 fun Power(num1: Double, num2: Double) : Double{
     return num1.pow(num2)
