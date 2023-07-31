@@ -55,6 +55,8 @@ import com.example.nothingc.components.CalcButtGridLayoutV
 import com.example.nothingc.components.MenuComponent
 import com.example.nothingc.components.MenuPopup
 import com.example.nothingc.ui.theme.NothingSilver
+import java.util.Stack
+
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,6 +90,9 @@ fun isSystemInDarkMode(context: Context): Boolean {
     val configuration = context.resources.configuration
     return configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
 }
+
+val stack = Stack<String>()
+
 @Composable
 private fun DetectOrientation() {
 
@@ -98,7 +103,7 @@ private fun DetectOrientation() {
                 val viewModel = viewModel<CalculatorViewModel>()
                 val state =  viewModel.viewState.collectAsState(
                         initial = CalculatorViewModel.ViewState(
-                            "0",
+                            stack,
                             "+",
                             "0",
                             "0"
@@ -115,7 +120,7 @@ private fun DetectOrientation() {
                 val state =
                     viewModel.viewState.collectAsState(
                         initial = CalculatorViewModel.ViewState(
-                            "0",
+                            stack,
                             "+",
                             "0",
                             "0"
@@ -232,7 +237,7 @@ private fun CalcScreenPreviewVertical() {
                 .fillMaxSize()
                 .background(if (isSystemInDarkTheme()) NothingBlack else NothingSilver)
         ) {
-            CalcScreenVertical(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
+            CalcScreenVertical(CalculatorViewModel.ViewState(stack, "+", "0", "0")) {}
         }
     }
 }
@@ -247,7 +252,7 @@ private fun CalcScreenPreviewHorizontal() {
                 .fillMaxSize()
                 .background(if (isSystemInDarkTheme()) NothingBlack else NothingSilver)
         ) {
-            CalcScreenHorizontal(CalculatorViewModel.ViewState("0", "+", "0", "0")) {}
+            CalcScreenHorizontal(CalculatorViewModel.ViewState(stack, "+", "0", "0")) {}
         }
     }
 }

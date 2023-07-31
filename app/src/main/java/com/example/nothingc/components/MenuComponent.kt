@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.example.nothingc.Operators
+//import com.example.nothingc.Operators
 import com.example.nothingc.scaledDp
 import com.example.nothingc.scaledSp
 import com.example.nothingc.ui.theme.Spacing.sm

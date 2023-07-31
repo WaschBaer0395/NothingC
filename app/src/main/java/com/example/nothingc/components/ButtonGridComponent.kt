@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.nothingc.ActionType
-import com.example.nothingc.Operators
+//import com.example.nothingc.Operators
 import com.example.nothingc.components.buttons.CalculatorButtonComponent
 import com.example.nothingc.components.buttons.CalculatorButtonComponentWide
 import com.example.nothingc.scaledDp
@@ -30,29 +30,29 @@ fun CalcButtGridLayoutV(modifier: Modifier = Modifier, dispatcher: (ActionType) 
         // left to right
         // start row 1
         ActionType.Clear,
-        ActionType.Operator(Operators.Power),
+        ActionType.Operator("^"),
         ActionType.Percentage,
-        ActionType.Operator(Operators.Divide),
+        ActionType.Operator("/"),
         // start row 2
         ActionType.Number((7).toDouble()),
         ActionType.Number((8).toDouble()),
         ActionType.Number((9).toDouble()),
-        ActionType.Operator(Operators.Multiply),
+        ActionType.Operator("*"),
         // start row 3
         ActionType.Number((4).toDouble()),
         ActionType.Number((5).toDouble()),
         ActionType.Number((6).toDouble()),
-        ActionType.Operator(Operators.Subtract),
+        ActionType.Operator("-"),
         // start row 4
         ActionType.Number((1).toDouble()),
         ActionType.Number((2).toDouble()),
         ActionType.Number((3).toDouble()),
-        ActionType.Operator(Operators.Add),
+        ActionType.Operator("+"),
         // start row 5
         ActionType.Number((0).toDouble()),
         ActionType.Decimal,
         ActionType.Delete,
-        ActionType.Calculate,
+        ActionType.Delete,
     )
 
     LazyVerticalGrid(
@@ -80,20 +80,20 @@ fun CalcButtGridLayoutH(modifier: Modifier = Modifier, dispatcher: (ActionType) 
         // from left to right
         // top to bottom
         // start column 1
-        ActionType.Operator(Operators.Deg),
-        ActionType.Operator(Operators.Inv),
-        ActionType.Operator(Operators.Sin),
+        ActionType.Operator("Deg"),
+        ActionType.Operator("Inv"),
+        ActionType.Operator("sin("),
         ActionType.Euler(),
         // start colum 2
-        ActionType.Operator(Operators.Sqrt),
-        ActionType.Operator(Operators.Power),
-        ActionType.Operator(Operators.Cos),
-        ActionType.Operator(Operators.Ln),
+        ActionType.Operator("sqrt("),
+        ActionType.Operator("^"),
+        ActionType.Operator("cos("),
+        ActionType.Operator("LN"),
         // start colum 3
         ActionType.Pi(),
-        ActionType.Operator(Operators.Faculty),
-        ActionType.Operator(Operators.Tan),
-        ActionType.Operator(Operators.Log),
+        ActionType.Operator("!"),
+        ActionType.Operator("tan("),
+        ActionType.Operator("log"),
         // start colum 4
         ActionType.Number((7).toDouble()),
         ActionType.Number((4).toDouble()),
@@ -110,15 +110,15 @@ fun CalcButtGridLayoutH(modifier: Modifier = Modifier, dispatcher: (ActionType) 
         ActionType.Number((3).toDouble()),
         ActionType.Delete,
         // start colum 7
-        ActionType.Operator(Operators.Divide),
-        ActionType.Operator(Operators.Multiply),
-        ActionType.Operator(Operators.Subtract),
-        ActionType.Operator(Operators.Add),
+        ActionType.Operator("/"),
+        ActionType.Operator("*"),
+        ActionType.Operator("-"),
+        ActionType.Operator("+"),
         // start colum 8
         ActionType.Clear,
-        ActionType.Operator(Operators.Brackets),
+        ActionType.Operator(")"),
         ActionType.Percentage,
-        ActionType.Calculate,
+        ActionType.Clear,
         //
         )
 

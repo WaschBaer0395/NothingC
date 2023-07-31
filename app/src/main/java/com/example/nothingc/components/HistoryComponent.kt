@@ -16,6 +16,7 @@ import com.example.nothingc.CalculatorViewModel
 import com.example.nothingc.scaledDp
 import com.example.nothingc.scaledSp
 import com.example.nothingc.ui.theme.appWideFont
+import java.util.Stack
 
 private val historyList =
     mutableListOf("1 + 2 = 3", "6 / 3 = 2", "5 x 2 = 10", "6 - 2 = 4", "7 - 2 = 5", "2 ^ 2 = 4", "4 ^ 2 = 16")
@@ -49,6 +50,6 @@ internal fun HistoryComponent(modifier: Modifier = Modifier, state: CalculatorVi
 @Composable
 fun HistoryComponentPreview() {
     Box(modifier = Modifier.padding(10.scaledDp())) {
-        HistoryComponent(state = CalculatorViewModel.ViewState("0","+","0","0"))
+        HistoryComponent(state = CalculatorViewModel.ViewState(Stack<String>(),"+","0","0"))
     }
 }

@@ -42,6 +42,7 @@ import com.example.nothingc.ui.theme.NothingWhite
 import com.example.nothingc.ui.theme.Spacing.sm
 import com.example.nothingc.ui.theme.appWideFont
 import kotlinx.coroutines.delay
+import java.util.Stack
 
 @Composable
 internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorViewModel.ViewState) {
@@ -74,7 +75,7 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                 modifier = Modifier.align(Alignment.End),
             ){
 
-                var input = state.num1
+                var input = state.inputStack.joinToString()
                 if (state.operator != ""){
                     input += " " + state.operator + " " + state.num2
                 }
@@ -91,7 +92,7 @@ internal fun DisplayComponent(modifier: Modifier = Modifier, state: CalculatorVi
                     fontSize = 60.scaledSp(),
                 )
 
-                if (state.num1 == "") BlinkingCursor(modifier = Modifier.align(Alignment.CenterEnd))
+                if (state.inputStack.isEmpty()) BlinkingCursor(modifier = Modifier.align(Alignment.CenterEnd))
             }
 
             Text(
@@ -150,6 +151,6 @@ fun BlinkingCursor(modifier: Modifier = Modifier) {
 @Composable
 fun DisplayComponentPreview() {
     Box(modifier = Modifier.padding(10.scaledDp())) {
-        DisplayComponent(state = CalculatorViewModel.ViewState("0","+","0","0"))
+        DisplayComponent(state = CalculatorViewModel.ViewState(Stack<String>(),"+","0","0"))
     }
 }
